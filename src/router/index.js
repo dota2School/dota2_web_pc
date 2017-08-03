@@ -1,8 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Hello from '@/components/Hello'
-import Test from '@/components/Test'
-import Left from '@/components/Left'
+import TeacherRank from '@/components/TeacherRank'
+import ClockDetails from '@/components/ClockDetails'
+import UserCount from '@/components/UserCount'
+import StudentRank from '@/components/StudentRank'
 
 Vue.use(Router)
 
@@ -10,18 +11,23 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name:   'Hello'  ,
-      component: Hello
+      name:'UserCount',
+      component: UserCount
     },
     {
-      path: '/test',
-      name: 'Test',
-      component: Test
+      path: '/ClockDetails',
+      name:'ClockDetails',
+      component: ClockDetails
     },
     {
-      path: '/left',
-      name: 'left',
-      component: Left
+      path: '/TeacherRank',
+      name:'TeacherRank',
+      component: TeacherRank
+    },
+    {
+      path: '/StudentRank',
+      name:'StudentRank',
+      component: StudentRank
     }
   ]
 })
