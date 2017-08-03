@@ -1,32 +1,27 @@
 <template>
-  <div class="rightPanel" id="app">
+  <div class="rightPanel">
     <div class="searchDiv">
       <label class="searchLabel">更新时间
         <Datepicker v-on:on-change="dateChange"
-                    format="yyyy/MM/dd HH:mm:ss"
+                    format="yyyy-MM-dd HH:mm:ss"
                     type="datetimerange" placeholder="选择日期和时间" style="width: 300px"></Datepicker>
       </label>
-      <label class="searchLabel">open_id  <input type="text"  v-model="openId" /></label>
-      <label class="searchLabel">微信昵称<input type="text"  v-model="wxnc"  /></label>
-      <label class="searchLabel">注册昵称<input type="text" v-model="zcnc" /></label>
+      <label class="searchLabel">open_id<Input type="text" placeholder="请输入open_id"  v-model="openId" ></Input></label>
+      <label class="searchLabel">微信昵称<Input type="text"  placeholder="请输入微信昵称" v-model="wxnc" ></Input></label>
+      <label class="searchLabel">注册昵称<Input type="text" placeholder="请输入注册昵称" v-model="zcnc"></Input></label>
       <label class="searchLabel">类型
-        <select v-model="selected1">
-          <option value="">全部</option>
-          <option value="2">老师</option>
-          <option value="1">学生</option>
-        </select>
+        <Select v-model="selected1">
+          <Option v-for="item in selected1Data" :value="item.value" :key="item.value">{{ item.label }}</Option>
+        </Select>
       </label>
       <label class="searchLabel">
         班级
-        <select v-model="selected2">
-          <option value="" disabled>全部</option>
-          <option value="初级班">初级班</option>
-          <option value="中级班">中级班</option>
-          <option value="高级版">高级版</option>
-        </select>
+        <Select v-model="selected2">
+          <Option v-for="item in selected1Data2" :value="item.value" :key="item.value">{{ item.label }}</Option>
+        </Select>
       </label>
       <label class="searchLabel">
-        <button class="btn" @click="search()">搜索</button>
+        <Button type="primary" shape="circle" icon="ios-search" @click="search()">搜索</Button>
       </label>
       <label class="searchLabel">
         共<a class="blue">{{total}}</a>名用户
@@ -63,18 +58,7 @@
       </tbody>
     </table>
     <div class="page-bar">
-      <div class="pagination">
-        <label>{{cur}} 页/共 {{pageNum}} 页</label>
-        <ul>
-          <li class="previous" v-if="showFirst" ><a class="fui-arrow-left"  @click="pre()">上一页</a></li>
-          <li v-for="index in indexs" :class="{'active': cur == index}">
-            <a @click="btnClick(index)">{{index}}</a>
-          </li>
-          <li class="next" v-if="showLast"><a class="fui-arrow-right" @click="next()">下一页</a></li>
-        </ul>
-      </div>
-      <div class="input-div-base">到 <input id="pageNumber" type="text" class="form-control" v-model="toPageNum"> 页</div>
-      <button class="btn btn-info" @click="goPage(toPageNum)"> 跳转</button>
+      <Page :total='total' :page-size="25" @on-change="btnClick" :current ="cur"></Page>
     </div>
   </div>
 </template>
@@ -83,6 +67,7 @@
   import VueResource from 'vue-resource'
   import Vue from 'vue'
   import Datepicker from 'iview/src/components/date-picker'
+  import DataInput from 'iview/src/components/input'
   import 'iview/dist/styles/iview.css';
 
   Vue.use(VueResource)
@@ -103,7 +88,39 @@
         zcnc: '',      //注册昵称
         selected1: '',     //身份类型  1为学生   2为老师   默认为空
         selected2: '',     //班级类型
-        dataRange:['2016-01-01', '2016-02-15']
+        dataRange:['', ''],
+        selected1Data:[
+          {
+            value: '',
+            label: '全部'
+          },
+          {
+            value: '1',
+            label: '学生'
+          },
+          {
+            value: '2',
+            label: '老师'
+          },
+        ],
+        selected1Data2:[
+          {
+            value: '',
+            label: '全部'
+          },
+          {
+            value: '初级班',
+            label: '初级班'
+          },
+          {
+            value: '中级班',
+            label: '中级班'
+          },
+          {
+            value: '高级班',
+            label: '高级班'
+          }
+        ]
       }
     },
     created(){
@@ -114,51 +131,23 @@
         if(this.total%25!==0) num +=1;
         this.pageNum = num;
         this.success = response.data.success;
+        console.log("pageNum  "+this.pageNum)
       },response=>{
         console.log("error request!")
       });
     },
     computed:{
-      indexs(index) {
-        var left = 1;
-        var right = this.pageNum;
-        var ar = [];
-        if(this.pageNum >= 11){
-          if(this.cur > 5 && this.cur < this.pageNum - 4){
-            left = this.cur - 5;
-            right = this.cur + 4;
-          }
-          else{
-            if(this.cur <= 5){
-              left = 1;
-              right = 10;
-            }else{
-              right = this.pageNum;
-              left = this.pageNum - 9;
-            }
-          }
-        }
-        while (left <= right){
-          ar.push(left);
-          left++;
-        }
-        return ar;
-      },
-      showLast() {
-        return this.cur !== this.pageNum;
-      },
-      showFirst() {
-        return this.cur !== 1
-      }
     },
     methods:{
       dateChange(date){
-        this.dataRange[0] = date[0];
-        this.dataRange[1]= date[1];
+        date = date.split(' - ')
+        this.dataRange[0] = date[0].trim();
+        this.dataRange[1]= date[1].trim();
+        console.log("date change "+this.dataRange[0]+"   "+this.dataRange[1])
       },
       calculateUrl(item) {
-        return "/web/user?start_update_time="+this.startTime+" 00:00:00"
-          +"&end_update_time="+this.endTime+" 00:00:00"
+        return "/web/user?start_update_time="+this.dataRange[0]
+          +"&end_update_time="+this.dataRange[1]
           +"&open_id="+this.openId
           +"&nick_name_p="+this.wxnc
           +"&nick_name="+this.zcnc
@@ -181,45 +170,6 @@
           });
         }
       },
-      goPage(toPageNum){
-        this.cur = toPageNum;
-        this.$http.get(this.calculateUrl(toPageNum)).then(function (response) {
-          this.rows = response.data.rows;
-          this.total = response.data.total;
-          var num = parseInt(this.$data.total / 25);
-          if(this.total%25!==0) num +=1;
-          this.pageNum = num;
-          this.success = response.data.success;
-        },function (response) {
-          console.log("error request!")
-        });
-      },
-      pre(){
-        this.$http.get(this.calculateUrl(this.data.cur-1)).then(function (response) {
-          this.rows = response.data.rows;
-          this.total = response.data.total;
-          var num = parseInt(this.total / 25);
-          if(this.total%25!==0) num +=1;
-          this.pageNum = num;
-          this.success = response.data.success;
-        },function (response) {
-          console.log("error request!")
-        });
-        this.cur = this.cur -1;
-      },
-      next(){
-        this.$http.get(this.data.cur+1).then(function (response) {
-          this.rows = response.data.rows;
-          this.total = response.data.total;
-          var num = parseInt(this.total / 25);
-          if(this.total%25!==0) num +=1;
-          this.pageNum = num;
-          this.success = response.data.success;
-        },function (response) {
-          console.log("error request!")
-        });
-        this.cur = this.$data.cur + 1;
-      },
       search() {
         this.$http.get(this.calculateUrl(1)).then(function (response) {
           this.rows = response.data.rows;
@@ -236,8 +186,11 @@
     }
   }
 </script>
-
-
 <style>
-
+  .searchLabel {
+    display: inline-block;
+    padding: 10px;
+    vertical-align: middle;
+    white-space: normal;
+  }
 </style>
