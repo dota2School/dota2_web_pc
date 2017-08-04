@@ -179,10 +179,4 @@
   }
 </script>
 <style>
-  .searchLabel {
-    display: inline-block;
-    padding: 10px;
-    vertical-align: middle;
-    white-space: normal;
-  }
 </style>
