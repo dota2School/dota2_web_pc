@@ -70,13 +70,16 @@
   import VueResource from 'vue-resource'
   import Vue from 'vue'
   import Datepicker from 'iview/src/components/date-picker'
-  import DataInput from 'iview/src/components/input'
+  import Button from 'iview/src/components/button';
   import 'iview/dist/styles/iview.css';
+  import {Select, Option} from 'iview/src/components/select';
+  import Input from 'iview/src/components/input';
+  import Page from 'iview/src/components/page';
 
   Vue.use(VueResource)
   export default {
     name: 'Test',
-    components: {Datepicker},
+    components: {Datepicker,Select, Option,Input,Page,Button},
     data(){
       return {
         rows:{},

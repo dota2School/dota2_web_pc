@@ -3,9 +3,7 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import iView from 'iview';
 
-Vue.use(iView);
 Vue.config.productionTip = false
 
 var v = new Vue({
