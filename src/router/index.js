@@ -1,10 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import TeacherRank from '@/components/TeacherRank'
-import ClockDetails from '@/components/ClockDetails'
-import UserCount from '@/components/UserCount'
-import StudentRank from '@/components/StudentRank'
-
 Vue.use(Router)
 
 export default new Router({
@@ -12,22 +7,22 @@ export default new Router({
     {
       path: '/',
       name:'UserCount',
-      component: UserCount
+      component: resolve => require(['@/components/UserCount'], resolve)
     },
     {
       path: '/ClockDetails',
       name:'ClockDetails',
-      component: ClockDetails
+      component: resolve => require(['@/components/ClockDetails'], resolve)
     },
     {
       path: '/TeacherRank',
       name:'TeacherRank',
-      component: TeacherRank
+      component: resolve => require(['@/components/TeacherRank'], resolve)
     },
     {
       path: '/StudentRank',
       name:'StudentRank',
-      component: StudentRank
+      component: resolve => require(['@/components/StudentRank'], resolve)
     }
   ]
 })
