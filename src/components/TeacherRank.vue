@@ -26,8 +26,8 @@
       <tr>
         <th>打卡人微信昵称</th>
         <th>打卡人昵称</th>
-        <th @click="thClick('signTimes')">打卡次数<img src="./../assets/icon-sort.png"/></th>
-        <th @click="thClick('ackTimes')">被确认次数<img src="./../assets/icon-sort.png"/></th>
+        <th @click="thClick('signTimes')">打卡次数<img src="/static/icon-sort.png"/></th>
+        <th @click="thClick('ackTimes')">被确认次数<img src="/static/icon-sort.png"/></th>
         <th>打卡时长</th>
         <th>头像</th>
         <th>确认最多学生微信昵称</th>

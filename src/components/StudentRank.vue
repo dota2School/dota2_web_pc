@@ -27,8 +27,8 @@
         <th>学生微信昵称</th>
         <th>学生昵称</th>
         <th>头像</th>
-        <th @click="thClick('signTimes')">确认数<img src="./../assets/icon-sort.png"/></th>
-        <th @click="thClick('sSignLong')">打卡时长<img src="./../assets/icon-sort.png"/></th>
+        <th @click="thClick('signTimes')">确认数<img src="/static/icon-sort.png"/></th>
+        <th @click="thClick('sSignLong')">打卡时长<img src="/static/icon-sort.png"/></th>
         <th>合作最多的老师微信昵称</th>
         <th>合作最多的老师注册昵称</th>
         <th>头像</th>
