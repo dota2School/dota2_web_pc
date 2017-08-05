@@ -209,7 +209,7 @@
           +"&nick_name_p="+this.wxnc
           +"&nick_name="+this.zcnc
           +"&class_type="+this.selected2
-          + "&page_num=" + (item-1)
+          + "&pageNum=" + (item-1)
           +"&order="+this.order
           +"&orderType="+this.orderType;
       },
