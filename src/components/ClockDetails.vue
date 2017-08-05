@@ -42,10 +42,10 @@
       </tr>
       </thead>
       <tbody>
-      <tr  v-for="row in rows">
+      <tr  v-for="(row , i) in rows">
         <td>{{row.signId}}</td>
         <td>{{row.tOpenId}}</td>
-        <td>{{row.tNickName}}</td>
+        <td>{{row.tNickNameP}}</td>
         <td>{{row.tNickName}}</td>
         <td class="avatar"><img style="max-width: 80px;" :src = row.tAvatarUrl /></td>
         <td>{{row.tTeachTimeInt}}</td>
@@ -56,7 +56,15 @@
         <td>{{row.sNickNameP}}</td>
         <td class="avatar"><img style="max-width: 80px;" :src = row.sAvatarUrl /></td>
         <td>{{row.sStatus}}</td>
-        <td class="alertContent"><p @click="showContent($event)">{{row.sEvaluate}}</p></td>
+        <td class="alertContent"><p @click="showContent(i)">{{row.sEvaluate}}</p></td>
+        <Modal
+          v-model="modal1"
+          title="评价"
+          v-show="i === showAlertIndex"
+          @on-ok="ok"
+          @on-cancel="ok">
+          <p>{{row.sEvaluate}}</p>
+        </Modal>
       </tr>
       </tbody>
     </table>
@@ -75,11 +83,11 @@
   import {Select, Option} from 'iview/src/components/select';
   import Input from 'iview/src/components/input';
   import Page from 'iview/src/components/page';
-
-  Vue.use(VueResource)
+  import Modal from 'iview/src/components/modal'
+  Vue.use(VueResource);
   export default {
     name: 'Test',
-    components: {Datepicker,Select, Option,Input,Page,Button},
+    components: {Datepicker,Select, Option,Input,Page,Button,Modal},
     data(){
       return {
         rows:{},
@@ -112,7 +120,9 @@
             value: '高级班',
             label: '高级班'
           }
-        ]
+        ],
+        showAlertIndex:-1,
+        modal1:true
       }
     },
     created(){
@@ -138,12 +148,11 @@
         console.log("date change "+this.dataRange[0]+"   "+this.dataRange[1])
       },
       calculateUrl(item) {
-        return "/web/sign?start_update_time="+this.dataRange[0]
-          +"&end_update_time="+this.dataRange[1]
+        return "/web/sign?start_sign_time="+this.dataRange[0]
+          +"&end_sign_time="+this.dataRange[1]
           +"&open_id="+this.openId
           +"&nick_name_p="+this.wxnc
           +"&nick_name="+this.zcnc
-          +"&type="+this.selected1
           +"&class_type="+this.selected2
           + "&page_num=" + (item-1);
       },
@@ -175,6 +184,15 @@
           console.log("error request!")
         });
       },
+      showContent (event) {
+        this.showAlertIndex = event;
+        this.modal1 = true;
+        console.log("will show "+event)
+      },
+      ok(){
+        this.showAlertIndex = -1;
+        console.log("set "+this.showAlertIndex)
+      }
     }
   }
 </script>

@@ -45,8 +45,8 @@
       <tbody>
       <tr v-for="row in rows">
         <td>{{ row.openId }}</td>
-        <td>{{ row.nickName }}</td>
         <td>{{ row.nickNameP }}</td>
+        <td>{{ row.nickName }}</td>
         <td class="avatar"><img style="max-width: 80px;" :src = row.avatarUrl /></td>
         <td>{{ row.type }}</td>
         <td>{{ row.classType }}</td>

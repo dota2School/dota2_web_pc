@@ -52,10 +52,10 @@
       <tr class="o-panel" v-show="i == index && isShow">
         <td class="bg-gray" colspan="10">
           <table class="childTable">
-            <tr v-for="sign in row.signData">
+            <tr v-for="(sign,j) in row.signData">
               <td>{{sign.signId}}</td>
               <td>{{sign.tOpenId}}</td>
-              <td>{{sign.tNickName}}</td>
+              <td>{{sign.tNickNameP}}</td>
               <td>{{sign.tNickName}}</td>
               <td>{{sign.tTeachTimeInt}}</td>
               <td>{{sign.tTeachDate}}</td>
@@ -64,7 +64,15 @@
               <td>{{sign.sNickName}}</td>
               <td>{{sign.sNickNameP}}</td>
               <td>{{sign.sStatus}}</td>
-              <td class="alertContent"><p @click="showContent($event)">{{sign.sEvaluate}}</p></td>
+              <td class="alertContent"><p @click="showContent(i,j)">{{sign.sEvaluate}}</p></td>
+              <Modal
+                v-model="showAlert"
+                title="评价"
+                v-show="i === showI && j===showJ"
+                @on-ok="ok"
+                @on-cancel="ok">
+                <p>{{sign.sEvaluate}}</p>
+              </Modal>
             </tr>
           </table>
         </td>
@@ -86,10 +94,11 @@
   import Input from 'iview/src/components/input';
   import Page from 'iview/src/components/page';
   import Button from 'iview/src/components/button';
+  import Modal from 'iview/src/components/modal'
   Vue.use(VueResource)
   export default {
     name: 'Test',
-    components: {Datepicker,Select, Option,Input,Page,Button},
+    components: {Datepicker,Select, Option,Input,Page,Button,Modal},
     data(){
       return {
         rows:{},
@@ -101,12 +110,15 @@
         toPageNum:1,  //绑定跳转页面
         wxnc: '',      //微信昵称
         zcnc: '',      //注册昵称
-        selected1: '',     //身份类型  1为学生   2为老师   默认为空
+        selected2: '',     //身份类型  1为学生   2为老师   默认为空
         dataRange:['', ''],
         order:'',
         orderType:'',
         index: 0,
         isShow: false,
+        showI:-1,
+        showJ:-1,
+        showAlert:false,
         selected1Data2:[
           {
             value: '',
@@ -196,7 +208,7 @@
           +"&endTime="+this.dataRange[1]
           +"&nick_name_p="+this.wxnc
           +"&nick_name="+this.zcnc
-          +"&class_type="+this.selected1
+          +"&class_type="+this.selected2
           + "&page_num=" + (item-1)
           +"&order="+this.order
           +"&orderType="+this.orderType;
@@ -231,6 +243,21 @@
           console.log("error request!")
         });
       },
+      spread:function (i) {        //展开
+        this.index = i;
+        this.isShow = !this.$data.isShow;
+      },
+      showContent (i,j) {
+        this.showI = i;
+        this.showJ = j;
+        this.showAlert = true;
+        console.log("will show "+event)
+      },
+      ok(){
+        this.showI = -1;
+        this.showJ = -1;
+        console.log("set "+this.showI+"  "+this.showJ)
+      }
     }
   }
 </script>
