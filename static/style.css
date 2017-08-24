@@ -1,70 +1,3 @@
-@charset "UTF-8";
-/* 设置编码 */
-/*初始化或者说是样式的重置  ，在关键的位置以及模块性质的地方添加注释 */
-/*CSS Reset*/
-/*所有元素设置margin padding 0，需要设置的位置重新设置*/
-body,
-div,
-dl,
-dt,
-dd,
-ul,
-ol,
-li,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-pre,
-code,
-form,
-fieldset,
-legend,
-input,
-textarea,
-p,
-blockquote,
-th,
-td,
-header,
-hgroup,
-nav,
-section,
-article,
-aside,
-footer,
-figure,
-figcaption,
-menu,
-button {
-  margin: 0;
-  padding: 0;
-  font-size: 14px;
-  font-family: "微软雅黑";
-  box-sizing: border-box;
-  color: #333333;
-}
-/*h5标签设置为块级元素*/
-header,
-nav,
-article,
-section,
-aside,
-footer {
-  display: block;
-}
-/*标题类的设置，主要是字体大小以及加粗样式*/
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-size: inherit;
-  font-weight: normal;
-}
 /*table 的默认样式*/
 table {
   border-collapse: collapse;
@@ -188,27 +121,42 @@ button.btn.btn-disabled:active {
 .spread {
   cursor: pointer;
 }
-.change {
-  width: 20px;
-  height: 20px;
-  background: url("../img/change.png") left top no-repeat;
-  display: inline-block;
-}
 .display {
   display: none;
 }
 .sort {
   display: inline;
-  background: url("../img/mysort.png") left top no-repeat;
+  background: url("/static/mysort.png") left top no-repeat;
   padding: 0px 10px;
 }
-.main {
+#app {
   width: 80%;
   margin: 0 auto;
   margin-top: 20px;
   position: relative;
 }
-.rightPanel {
+#app .leftPanel {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 120px;
+  background: #FFFFFF;
+  border: 1px solid #d5d5d5;
+}
+#app .leftPanel ul {
+  overflow: hidden;
+  padding-bottom: 50px;
+}
+#app .leftPanel li {
+  line-height: 20px;
+  padding: 10px;
+}
+#app .leftPanel li.active {
+  border-left: 2px solid #2f7ce1;
+  background: #F2F2F2;
+  color: #2f7ce1;
+}
+#app .rightPanel {
   float: right;
   margin-left: 140px;
   padding-bottom: 100px;
@@ -447,12 +395,6 @@ td.alertContent p {
   border: #e7e7eb solid 1px;
   padding: 6px 14px;
   margin: 0px 10px;
-}
-.page .nextpage {
-  background: url("../img/nextpage.png") left top no-repeat;
-}
-.page .prepage {
-  background: url("../img/prepage.png") left top no-repeat;
 }
 /* 分页样式 */
 .page-bar {
