@@ -64,8 +64,9 @@ i {
 em {
   color: #f28c48;
 }
-body {
+html body {
   background-color: #e7e8eb;
+  font-size: 14px;
 }
 button {
   border: #d5d5d5 solid 1px;
@@ -149,9 +150,13 @@ button.btn.btn-disabled:active {
 }
 #app .leftPanel li {
   line-height: 20px;
-  padding: 10px;
 }
-#app .leftPanel li.active {
+#app .leftPanel li a{
+  display: block;
+  padding: 10px;
+  color: #333;
+}
+#app .leftPanel .router-link-exact-active.router-link-active {
   border-left: 2px solid #2f7ce1;
   background: #F2F2F2;
   color: #2f7ce1;
@@ -168,17 +173,27 @@ button.btn.btn-disabled:active {
 }
 .searchDiv .searchLabel {
   display: inline-block;
-  padding: 10px;
+  padding: 10px 20px;
   vertical-align: middle;
   white-space: normal;
 }
 .searchDiv .searchLabel input {
+  margin-left: 6px;
   padding: 5px;
   border: 1px solid #d5d5d5;
 }
+.searchDiv .searchLabel .width220{
+  width:220px;
+}
 .searchDiv .searchLabel select {
+  width: 100px;
+  margin-left: 6px;
   padding: 5px;
   border: 1px solid #d5d5d5;
+}
+.searchLabel .selectWrapper{
+  display: inline-block;
+  margin-left:5px;
 }
 .alert_div {
   display: none;

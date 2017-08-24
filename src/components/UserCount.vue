@@ -6,19 +6,23 @@
                     format="yyyy-MM-dd HH:mm:ss"
                     type="datetimerange" placeholder="选择日期和时间" style="width: 300px"></Datepicker>
       </label>
-      <label class="searchLabel">open_id<Input type="text" placeholder="请输入open_id"  v-model="openId" ></Input></label>
-      <label class="searchLabel">微信昵称<Input type="text"  placeholder="请输入微信昵称" v-model="wxnc" ></Input></label>
-      <label class="searchLabel">注册昵称<Input type="text" placeholder="请输入注册昵称" v-model="zcnc"></Input></label>
+      <label class="searchLabel">open_id<Input class="width220" type="text" placeholder="请输入open_id"  v-model="openId" ></Input></label>
+      <label class="searchLabel">微信昵称<Input class="width220" type="text"  placeholder="请输入微信昵称" v-model="wxnc" ></Input></label>
+      <label class="searchLabel">注册昵称<Input class="width220" type="text" placeholder="请输入注册昵称" v-model="zcnc"></Input></label>
       <label class="searchLabel">类型
-        <Select v-model="selected1">
-          <Option v-for="item in selected1Data" :value="item.value" :key="item.value">{{ item.label }}</Option>
-        </Select>
+        <div class="selectWrapper width220">
+          <Select v-model="selected1">
+            <Option v-for="item in selected1Data" :value="item.value" :key="item.value">{{ item.label }}</Option>
+          </Select>
+        </div>
       </label>
       <label class="searchLabel">
         班级
-        <Select v-model="selected2">
-          <Option v-for="item in selected1Data2" :value="item.value" :key="item.value">{{ item.label }}</Option>
-        </Select>
+        <div class="selectWrapper width220">
+          <Select v-model="selected2">
+            <Option v-for="item in selected1Data2" :value="item.value" :key="item.value">{{ item.label }}</Option>
+          </Select>
+        </div>
       </label>
       <label class="searchLabel">
         <Button type="primary" shape="circle" icon="ios-search" @click="search()">搜索</Button>
