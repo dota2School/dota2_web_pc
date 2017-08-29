@@ -2,9 +2,9 @@
   <div class="rightPanel">
     <div class="searchDiv">
       <label class="searchLabel">更新时间
-        <Datepicker v-on:on-change="dateChange"
+        <Date-picker v-on:on-change="dateChange"
                     format="yyyy-MM-dd HH:mm:ss"
-                    type="datetimerange" placeholder="选择日期和时间" style="width: 300px"></Datepicker>
+                    type="datetimerange" placeholder="选择日期和时间" style="width: 300px"></Date-picker>
       </label>
       <label class="searchLabel">open_id<Input class="width220" type="text" placeholder="请输入open_id"  v-model="openId" ></Input></label>
       <label class="searchLabel">微信昵称<Input class="width220" type="text"  placeholder="请输入微信昵称" v-model="wxnc" ></Input></label>
@@ -70,17 +70,10 @@
 <script>
   import VueResource from 'vue-resource'
   import Vue from 'vue'
-  import Datepicker from 'iview/src/components/date-picker'
-  import 'iview/dist/styles/iview.css';
-  import {Select, Option} from 'iview/src/components/select';
-  import Input from 'iview/src/components/input';
-  import Page from 'iview/src/components/page';
-  import Button from 'iview/src/components/button';
 
   Vue.use(VueResource)
   export default {
     name: 'Test',
-    components: {Datepicker,Select, Option,Input,Page,Button},
     data(){
       return {
         rows:{},
