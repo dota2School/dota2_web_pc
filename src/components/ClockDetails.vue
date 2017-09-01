@@ -109,13 +109,14 @@
         selected1Data2:[
           { value: '', label: '全部' },
           { value: '提高班', label: '提高班' },
-          { value: '萌新班', label: '梦新班' }
+          { value: '萌新班', label: '萌新班' }
         ],
         classNameData:[
           { value: '', label: '全部'  },
-          { value: '萌新1班', label: '萌新1班' },
-          { value: '萌新2班', label: '萌新2班' },
-          { value: '萌新3班', label: '萌新3班' }
+          { value: '萌新(1)班', label: '萌新(1)班' },
+          { value: '萌新(2)班', label: '萌新(2)班' },
+          { value: '萌新(3)班', label: '萌新(3)班' },
+          { value: '萌新(4)班', label: '萌新(4)班' }
         ],
         showAlertIndex:-1,
         modal1:true
