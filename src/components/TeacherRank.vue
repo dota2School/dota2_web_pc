@@ -9,10 +9,18 @@
       <label class="searchLabel">打卡人微信昵称<Input class="width220" type="text"  placeholder="请输入微信昵称" v-model="wxnc" ></Input></label>
       <label class="searchLabel">打卡人注册昵称<Input class="width220" type="text" placeholder="请输入注册昵称" v-model="zcnc"></Input></label>
       <label class="searchLabel">
-        班级
+        班级类型
         <div class="selectWrapper width220">
           <Select v-model="selected2">
             <Option v-for="item in selected1Data2" :value="item.value" :key="item.value">{{ item.label }}</Option>
+          </Select>
+        </div>
+      </label>
+      <label class="searchLabel">
+        班级名称
+        <div class="selectWrapper width220">
+          <Select v-model="class_name">
+            <Option v-for="item in classNameData" :value="item.value" :key="item.value">{{ item.label }}</Option>
           </Select>
         </div>
       </label>
@@ -112,6 +120,7 @@
         zcnc: '',      //注册昵称
         selected1: '',     //身份类型  1为学生   2为老师   默认为空
         selected2: '',     //班级类型
+        class_name: '',    //班级名称
         dataRange:['', ''],
         order:'',
         orderType:'',
@@ -121,23 +130,16 @@
         showJ:-1,
         showAlert:false,
         selected1Data2:[
-          {
-            value: '',
-            label: '全部'
-          },
-          {
-            value: '初级班',
-            label: '初级班'
-          },
-          {
-            value: '中级班',
-            label: '中级班'
-          },
-          {
-            value: '高级班',
-            label: '高级班'
-          }
-        ]
+          { value: '', label: '全部' },
+          { value: '提高班', label: '提高班' },
+          { value: '萌新班', label: '梦新班' }
+        ],
+        classNameData:[
+          { value: '', label: '全部'  },
+          { value: '萌新1班', label: '萌新1班' },
+          { value: '萌新2班', label: '萌新2班' },
+          { value: '萌新3班', label: '萌新3班' }
+        ],
       }
     },
     created(){
@@ -210,6 +212,7 @@
           +"&nick_name_p="+this.wxnc
           +"&nick_name="+this.zcnc
           +"&class_type="+this.selected2
+          +"&class_name="+this.class_name
           + "&pageNum=" + (item-1)
           +"&order="+this.order
           +"&orderType="+this.orderType;
@@ -262,5 +265,3 @@
     }
   }
 </script>
-<style>
-</style>
