@@ -22,6 +22,10 @@ export default new Router({
             path: '/StudentRank',
             name: 'StudentRank',
             component: resolve => require(['@/components/StudentRank'], resolve)
-        }
+        },{
+        path: '/export',
+        name: 'export',
+        component: resolve => require(['@/components/export'], resolve)
+      }
     ]
 })

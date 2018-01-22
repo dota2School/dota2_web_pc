@@ -37,6 +37,12 @@
                           <span class="layout-text">学生打卡排名</span>
                       </Menu-item>
                     </router-link>
+                  <router-link to="/export">
+                    <Menu-item name="5">
+                      <Icon type="ios-analytics" :size="iconSize"></Icon>
+                      <span class="layout-text">导出</span>
+                    </Menu-item>
+                  </router-link>
                 </Menu>
             </i-col>
             <i-col :span="spanRight">
